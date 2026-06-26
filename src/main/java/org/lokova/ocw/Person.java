@@ -33,9 +33,14 @@ public class Person implements Serializable {
 	private Set<String> tags;
 	private String description;
 	private Person partner;
+	private Couple couple;
 
 	public Alignment getAlignment() {
 		return alignment;
+	}
+
+	public Couple getCouple() {
+		return couple;
 	}
 
 	public String getDescription() {
@@ -103,6 +108,10 @@ public class Person implements Serializable {
 		this.alignment = alignment;
 	}
 
+	protected void setCouple(Couple couple) {
+		this.couple = couple;
+	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -165,6 +174,11 @@ public class Person implements Serializable {
 			throw new IllegalArgumentException("Weight must be between 40000 and 100000 grams");
 		}
 		this.weight = weight;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }
