@@ -35,6 +35,18 @@ public class Person implements Serializable {
 	private Person partner;
 	private Couple couple;
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if ((obj == null) || (getClass() != obj.getClass())) {
+			return false;
+		}
+		Person other = (Person) obj;
+		return uid == other.uid;
+	}
+
 	public Alignment getAlignment() {
 		return alignment;
 	}
@@ -101,6 +113,11 @@ public class Person implements Serializable {
 
 	public int getWeight() {
 		return weight;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(Integer.valueOf(uid));
 	}
 
 	public void setAlignment(Alignment alignment) {
