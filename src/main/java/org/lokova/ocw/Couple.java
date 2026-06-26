@@ -6,10 +6,18 @@ import java.util.Objects;
 public class Couple implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public static Couple of(Person p1, Person p2) {
+		if (p1.getPartner().equals(p2)) {
+			return p1.getCouple();
+		}
+		return new Couple(p1, p2);
+	}
+
 	private Person[] members = new Person[2];
 	private boolean isReversible;
 
-	public Couple(Person p1, Person p2) {
+	private Couple(Person p1, Person p2) {
 		Objects.requireNonNull(p1);
 		Objects.requireNonNull(p2);
 		if (p1.equals(p2)) {
