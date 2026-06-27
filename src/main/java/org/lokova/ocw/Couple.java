@@ -15,7 +15,6 @@ public class Couple implements Serializable {
 	}
 
 	private Person[] members = new Person[2];
-	private boolean isReversible;
 
 	private Couple(Person p1, Person p2) {
 		Objects.requireNonNull(p1);
@@ -32,19 +31,8 @@ public class Couple implements Serializable {
 		if (p2.getPartner() != null) {
 			throw new IllegalArgumentException(p2 + "already has a partner");
 		}
-		if ((p1.getPolarity() - p2.getPolarity()) > 25) {
-			members[0] = p1;
-			members[1] = p2;
-			isReversible = false;
-		} else if ((p2.getPolarity() - p1.getPolarity()) > 25) {
-			members[0] = p2;
-			members[1] = p1;
-			isReversible = false;
-		} else {
-			members[0] = p1;
-			members[1] = p2;
-			isReversible = true;
-		}
+		members[0] = p1;
+		members[1] = p2;
 		p1.setPartner(p2);
 		p2.setPartner(p1);
 		p1.setCouple(this);
@@ -56,7 +44,7 @@ public class Couple implements Serializable {
 	}
 
 	public boolean isReversible() {
-		return isReversible;
+		return Math.abs(members[0].getPolarity() - members[1].getPolarity()) > 50;
 	}
 
 }
